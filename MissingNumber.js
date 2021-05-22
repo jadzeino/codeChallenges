@@ -23,16 +23,18 @@ each element of array A is an integer within the range [1..(N + 1)].
 */
 
 function solution_1(A) {    
-    const sortedArray = A.sort((a,b)=>a>b)    
-    let missingElement
-    let initValue=sortedArray[0]
-    for(var i = 0;i<sortedArray.length;i++){
-        if(sortedArray[i]!=initValue){
-            missingElement=initValue
-            break;
-        }
-        initValue++
+    if (A.length === 0 || !A) {
+    return 1;
     }
-    return missingElement
-
+    A.sort((a, b) => a - b);
+    let count = A[0];
+    if (count !== 1) { return 1 }
+    for (let i = 0; i <= A.length; i++) {
+    if (A[i + 1] === count + 1) {
+        count ++;
+        continue
+    }
+    return count + 1;
 }
+}
+
