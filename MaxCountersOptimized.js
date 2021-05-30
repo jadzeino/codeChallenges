@@ -13,7 +13,32 @@
   returns a sequence of integers representing the values of the counters.
 */
 
-function solution(N,A){
+//100% solution
+function solution(N, A) {
+let counters = Array(N).fill(0);
+let maxCounter = 0;
+let maxToSet = 0;
+for (number of A) {
+	if (number === N + 1)
+		{ 
+    maxToSet = maxCounter;
+    }
+  else
+  {
+  const index = number - 1;
+  counters[index] = Math.max(counters[index] + 1, maxToSet + 1);
+  maxCounter = Math.max(counters[index], maxCounter);
+  }
+ } 
+counters = counters.map(value => Math.max(value, maxToSet));
+return counters;
+}
+//console.log(solution(5,[3,4,4,6,1,4,4]))
+
+
+
+
+function solution_B(N,A){
   //create the counters array and set it by defualt to 0  
  let counters = new Array(N).fill(0)
  console.log("counters ",counters)
