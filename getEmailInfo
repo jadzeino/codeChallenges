@@ -1,0 +1,113 @@
+const messages = [	  
+  {
+		sender:"Omar",
+    reciver:"Ali",
+    body:"hi man its me Omar",
+    send_at:"14.02.1985",
+    seen_at:"14.2.1986",
+	},
+  {
+		sender:"Omar",
+    reciver:"Ali",
+    body:"hi man its me Omar",
+    send_at:"14.02.1985",
+    seen_at:"14.2.1986",
+	},
+  {
+		sender:"Ahmed",
+    reciver:"Omar",
+    body:"hi man its me Ahmad",
+    send_at:"14.02.1985",
+    seen_at:"14.2.1986",
+	},
+  {
+		sender:"Omar",
+    reciver:"Ahmed",
+    body:"ja i know man",
+    send_at:"14.02.1985",
+    seen_at:"14.2.1986",
+	},  
+  {
+		sender:"Omar",
+    reciver:"Ali",
+    body:"ja i know man but ali is here",
+    send_at:"14.02.1985",
+    seen_at:"14.2.1986",
+	},
+  {
+		sender:"Omar",
+    reciver:"Ahmed",
+    body:"hi man",
+    send_at:"14.02.1985",
+    seen_at:"14.2.1986",
+	},
+  {
+		sender:"Ali",
+    reciver:"Ahmed",
+    body:"hi man its Ali",
+    send_at:"14.02.1985",
+    seen_at:"14.2.1986",
+	}
+]
+//most messages recived ==> key reciver , just counting if reciver is existed key: reciver ===> value +1
+//most send messages   ==> key sender , just counting if reciver is existed key: sender ===> value +1
+//soam dosnt count   ==> key sender : reciver maybe also the body , just counting if reciver is existed key: sender ===> value +1
+//number of message per person and reciver (key sender: recevicer ==> value is new Map (key=="body message" , value wwould be the count) 
+//
+let users = new Map()
+messages.forEach ((({sender,reciver,body})=>{
+if(!users.has(reciver)){
+ let person = new Map() 
+ person.set("recivedCounts",0) 
+ person.set("sendBy",new Map())
+	users.set(reciver,person)  
+}
+let a = users.get(reciver)
+a.set("recivedCounts",a.get("recivedCounts")+1)
+
+let b = a.get("sendBy")
+if(!b.get(sender)){
+		b.set(sender,1)
+}else{
+		b.set(sender,b.get(sender)+1)
+}
+//a.set("recivedCounts",a.get("sendCounts")+1)
+//console.log("message ",message)
+
+}))
+
+for (const [key, value] of users) {
+  console.log(key + ' = ' + value)
+  for (const [key2, value2] of value) {
+  console.log("....... " + key2 + ' = ' + value2)
+  if(key2=="sendBy"){
+  for (const [key3, value3] of value2) {
+  console.log(".............. " + key3 + ' = ' + value3)
+  }
+  
+}
+}
+}
+
+// the most recived message is the one has the highst recivedCounts
+
+
+	
+//var mapAsc = new Map([...map.entries()].sort());
+
+// whos the most sender
+// who most recived messages
+// for each one how many message he got from each person
+// find spam , duplicated body more than 3 times for example then its a spam , we ignore it.
+//
+
+
+
+//archituchture - psedo code
+// new feature , add a pull for users to vote where to eat
+// api  -create/pole ==> this will take the pole options (name , options (a,b,c,d)) 
+// api  -create/vote ==> this will take the pole options (user,userId,poleId,votedAnswer)
+// api  -get/vote ==> this will take the pole options ()
+// api  -delete/vote ==> this will take the pole options ()
+// api  -inviteFrindsToPole ==> this will take the pole options (poleId,friendId)
+
