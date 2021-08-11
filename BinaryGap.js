@@ -18,6 +18,21 @@ Write an efficient algorithm for the following assumptions:
 
 N is an integer within the range [1..2,147,483,647].
 */
+function solution(N) {
+    // write your code in JavaScript (Node.js 8.9.4)
+const text=N.toString(2)
+const arr = text.split(/(?!1)(0+)(?=1)/)
+
+const filtered = arr.filter(item=> item.indexOf('1') === -1)
+
+let maxNumber = 0
+filtered.forEach(item=>{
+	if(item.length>maxNumber){
+  maxNumber=item.length
+  }
+})
+return maxNumber
+}
 
 function solution_1(N) {   
   const binary = N.toString(2, 10);  
